@@ -1,8 +1,8 @@
 处理后的数据集链接：
 
 通过百度网盘分享的文件：train_test.zip
-链接：https://pan.baidu.com/s/13taTxqpGAckUblN48jGd8w?pwd=b3n5 
-提取码：b3n5。
+链接：https://pan.baidu.com/s/1w2jFIBwefmQBryXtpHPAdg?pwd=pmq0 
+提取码：pmq0
 
 
 
