@@ -26,7 +26,7 @@ class ImageDataset(Dataset):
 
         # 加载标签（假设标签是一个简单的整数）
         with open(label_path, 'r') as f:
-            label = int((f.read().strip().split(' '))[0])
+            label = int((f.read().strip().split(' '))[0])-1
 
         # 如果有数据增强或预处理操作，应用在图像上
         if self.transform:
