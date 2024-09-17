@@ -3,8 +3,8 @@ import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageOps
 import cv2
-from UnetDetection.util.filter import gaussian_fuzzy_filter
-from UnetDetection.util.image_open import open_image
+from util.filter import gaussian_fuzzy_filter
+
 
 
 def crop_resize_and_mask(image_path,bbox,output_path):
@@ -93,15 +93,106 @@ def process_images_and_labels(image_folder, label_folder, output_folder):
                 pass
                 # print(f"Label file not found for {filename}")
 
-# 使用示例
-image_folder = 'E:/Dataset/Contest4/Ultrasound_breast_data/test_A/classification-test/A/5/images'  # images 文件夹路径
-label_folder = 'E:/Dataset/Contest4/Ultrasound_breast_data/test_A/classification-test/A/5/labels' # labels 文件夹路径
-output_folder = 'E:/Dataset/Contest4/Ultrasound_breast_data/test_A/classification-test/A/5/images_cropped'  # 输出文件夹路径
+# # 使用示例
+image_folder = 'E:/Dataset/Contest4/Ultrasound_breast_data/test_A/feature-test/A/images'  # images 文件夹路径
+label_folder = 'E:/Dataset/Contest4/Ultrasound_breast_data/test_A/feature-test/A/labels' # labels 文件夹路径
+output_folder = 'E:/Dataset/Contest4/Ultrasound_breast_data/test_A/feature-test/A/cropped_images'  # 输出文件夹路径
 process_images_and_labels(image_folder, label_folder, output_folder)
 
 
 
 
+label_map = {
+    "boundary": 0,
+    "calcification": 1,
+    "direction": 2,
+    "shape": 3
+}
+def process_features_labels(parent_path):
+    img_path = os.path.join(parent_path,'images')
+    boundary_labels = os.path.join(parent_path + '/boundary_labels')
+    calcification_labels = os.path.join(parent_path + '/calcification_labels')
+    direction_labels = os.path.join(parent_path + '/direction_labels')
+    shape_labels = os.path.join(parent_path + '/shape_labels')
+    output_path = os.path.join(parent_path + '/labels')
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+    for filename in os.listdir(img_path):
+        flag = 0
+        if filename.endswith('.jpg') or filename.endswith('.png'):
+            # 获取图像文件的基础名称（不带扩展名）
+            base_name = os.path.splitext(filename)[0]
+
+            # 1. boundary_label
+            boundary_labels_path = os.path.join(boundary_labels,base_name + '.txt').replace('\\','/')
+            if os.path.exists(boundary_labels_path):
+                with open(boundary_labels_path, 'r') as f:
+                    b_content = f.read().strip()
+                    if not b_content:
+                        boundary_label = 999
+                        pass
+                    else:
+
+                        flag = 1
+                        b_data = b_content.split(' ')
+                        boundary_label = int(b_data[0])
+                        bbox = list(map(float, b_data[-4:]))
+
+            # 2. calcification_label
+            calcification_labels_path = os.path.join(calcification_labels, base_name + '.txt')
+            if os.path.exists(calcification_labels_path):
+                with open(calcification_labels_path, 'r') as f:
+                    c_content = f.read().strip()
+                    if not c_content:
+                        calcification_label = 999
+                        pass
+                    else:
+                        c_data = c_content.split(' ')
+                        calcification_label = int(c_data[0])
+                        if flag == 0:
+                            flag = 1
+                            bbox = list(map(float, c_data[-4:]))
+
+            # 3. direction_label
+            direction_labels_path = os.path.join(direction_labels, base_name + '.txt')
+            if os.path.exists(direction_labels_path ):
+                with open(direction_labels_path, 'r') as f:
+                    d_content = f.read().strip()
+                    if not d_content:
+                        direction_label = 999
+                        pass
+                    else:
+                        d_data = d_content.split(' ')
+                        direction_label = int(d_data[0])
+                        if flag == 0:
+                            flag = 1
+                            bbox = list(map(float, d_data[-4:]))
+
+            # 4. shape_label
+            shape_labels_path = os.path.join(shape_labels, base_name + '.txt')
+            if os.path.exists(shape_labels_path ):
+                with open(shape_labels_path, 'r') as f:
+                    s_content = f.read().strip()
+                    if not s_content:
+                        shape_label = 999
+                        pass
+                    else:
+                        s_data = s_content.split(' ')
+                        shape_label = int(s_data[0])
+                        if flag == 0:
+                            flag = 1
+                            bbox = list(map(float, s_data[-4:]))
+
+            bbox.insert(0,shape_label)
+            bbox.insert(0,direction_label)
+            bbox.insert(0,calcification_label)
+            bbox.insert(0,boundary_label)
+
+            written_path = os.path.join(output_path, base_name + '.txt').replace('\\','/')
+            with open(written_path, 'w') as file:
+                file.write(' '.join(map(str, bbox)))
 
 
+# process_features_labels(parent_path='E:/Dataset/Contest4/Ultrasound_breast_data/feature_train/train')
+# process_features_labels(parent_path='E:/Dataset/Contest4/Ultrasound_breast_data/test_A/feature-test/A')
 
