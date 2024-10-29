@@ -114,8 +114,6 @@ T 表示所设计算法的运行时间得分。所有参赛队伍设计的算法
 
 **图像分类任务：YOLO11，目前开发UI中**
 
-![](https://agent-demo-leo.oss-cn-chengdu.aliyuncs.com/yolo.png)
-
 **特征识别任务：**
 
 ![image-20241029171744413](https://cdn.jsdelivr.net/gh/LeonardoMESSI/Picgo/img/image-20241029171744413.png)
