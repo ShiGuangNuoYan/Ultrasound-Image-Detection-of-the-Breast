@@ -112,39 +112,23 @@ T 表示所设计算法的运行时间得分。所有参赛队伍设计的算法
 
 # 四. 我们的模型
 
-处理后的乳腺肿瘤类型分类数据集链接：
+**图像分类任务：YOLO11，目前开发UI中**
 
-通过百度网盘分享的文件：image_train_test.zip
-链接：https://pan.baidu.com/s/1B4At0IucgGsFpCOZ8E-ZTg?pwd=9v9o 
-提取码：9v9o
+![image-20241029171613399](C:/Users/86159/AppData/Roaming/Typora/typora-user-images/image-20241029171613399.png)
 
+**特征识别任务：**
 
+![image-20241029171744413](https://cdn.jsdelivr.net/gh/LeonardoMESSI/Picgo/img/image-20241029171744413.png)
 
-处理后的乳腺肿瘤特征分类数据集链接：
-
-通过百度网盘分享的文件：feature_train_test.zip
-链接：https://pan.baidu.com/s/11fJTEIPUwNmyX7bMrfe5ZA?pwd=l2nx 
-提取码：l2nx
+我们用ResNet-50提取图像全局特征。并用自己训练的分割模型对病灶处周围提取关键信息，并用CNN进行编码。这里我们为了简便起见，将全局特征和局部特征concat到一起，继续前向传播。在最后，我们为每个特征设计了分类头。为了进一步提高模型检测特征的能力（尤其是钙化），我们将增强对比度的图像与原图像进行差分(以突出图像中的白斑部分),并将这个差分向量加上主干网络的向量一起进行分类。
 
 
 
+**Demo：**
 
+我们提供了Demo版本的测试集TestB，可以直接使用
 
 下载后解压在任何路径，使用脚本
 
-cd baseline
 
-肿瘤类型六分类：
-
-```shell
-python EfficientNet.py --image_dir /your/path/to/image_classification
-```
-
-
-
-肿瘤特征识别：
-
-```shell
-python EfficientNet.py --feature_dir /your/path/to/feature_classification  --f True 
-```
 
