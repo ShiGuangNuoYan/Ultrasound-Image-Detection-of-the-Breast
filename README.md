@@ -114,7 +114,7 @@ T 表示所设计算法的运行时间得分。所有参赛队伍设计的算法
 
 **图像分类任务：YOLO11，目前开发UI中**
 
-![image-20241029171613399](C:/Users/86159/AppData/Roaming/Typora/typora-user-images/image-20241029171613399.png)
+![](https://agent-demo-leo.oss-cn-chengdu.aliyuncs.com/yolo.png)
 
 **特征识别任务：**
 
