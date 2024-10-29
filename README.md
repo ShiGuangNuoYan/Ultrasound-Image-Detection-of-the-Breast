@@ -132,8 +132,8 @@ T 表示所设计算法的运行时间得分。所有参赛队伍设计的算法
 
 此外我们提供了权重文件，请下载：
 
-[Feature_classification~SegResNet]: https://drive.google.com/file/d/1cKapyY3htjBlu1o_lNI63mfejHnaN_JH/view?usp=drive_link
-[YOLOV11]: https://drive.google.com/file/d/12lxfLsdbyVwvb9xnZmjpvuS0g5RVBAy3/view?usp=drive_link
+[特征分类-SegResNet](https://drive.google.com/file/d/1cKapyY3htjBlu1o_lNI63mfejHnaN_JH/view?usp=drive_link)
 
+[图像分类-YOLOV11](https://drive.google.com/file/d/12lxfLsdbyVwvb9xnZmjpvuS0g5RVBAy3/view?usp=drive_link)
 
-
+并将他们放入本项目目录下的checkpoint文件夹下
