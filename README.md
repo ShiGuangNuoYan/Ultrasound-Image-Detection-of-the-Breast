@@ -126,14 +126,22 @@ T 表示所设计算法的运行时间得分。所有参赛队伍设计的算法
 
 **Demo：**
 
-我们提供了Demo版本的测试集TestB，可以直接使用
-
-下载后解压在任何路径，使用脚本
-
-此外我们提供了权重文件，请下载：
+我们提供了权重文件，请下载：
 
 [特征分类-SegResNet](https://drive.google.com/file/d/1cKapyY3htjBlu1o_lNI63mfejHnaN_JH/view?usp=drive_link)
 
 [图像分类-YOLOV11](https://drive.google.com/file/d/12lxfLsdbyVwvb9xnZmjpvuS0g5RVBAy3/view?usp=drive_link)
 
-并将他们放入本项目目录下的checkpoint文件夹下
+并将他们放入本项目目录下的checkpoint文件夹下。
+
+此外我们提供了Demo版本的测试集TestB，可以直接使用。
+
+
+
+完成这两项后，使用脚本开始Demo(为了不引起歧义，请使用绝对路径)：
+
+```shell
+cd project
+python run.py python run.py  --feature_dir "Path/to/TestB/fea" --cla_dir "Path/to/TestB/cla" --fea_model_path "Path/to/project/checkpoint/segresnet_best_model.pth" --cla_model_path "Path/to/project/checkpoint/yolo_best_model.pt"
+```
+
