@@ -118,7 +118,7 @@ T 表示所设计算法的运行时间得分。所有参赛队伍设计的算法
 
 **特征识别任务：**
 
-![image-20241029171744413](https://cdn.jsdelivr.net/gh/LeonardoMESSI/Picgo/img/image-20241029171744413.png)
+![](https://agent-demo-leo.oss-cn-chengdu.aliyuncs.com/feauture-pipeline.png)
 
 我们用ResNet-50提取图像全局特征。并用自己训练的分割模型对病灶处周围提取关键信息，并用CNN进行编码。这里我们为了简便起见，将全局特征和局部特征concat到一起，继续前向传播。在最后，我们为每个特征设计了分类头。为了进一步提高模型检测特征的能力（尤其是钙化），我们将增强对比度的图像与原图像进行差分(以突出图像中的白斑部分),并将这个差分向量加上主干网络的向量一起进行分类。
 
